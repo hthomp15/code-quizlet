@@ -12,19 +12,19 @@ var choice4El = document.querySelector(".choice-4");
 
 var questionForm = [
     {
-        "Question": "question 1",
-        "Answers": ["blah", 4, 8, 7],
-        "Correct Answer": ""
+        "Question": "Inside which HTML element do we put the JavaScript?",
+        "Answers": ["<scripting>", "<javascript>", "<script>", "<js>"],
+        "Correct Answer": "<script>"
     },
     {
-        "Question": "question 2",
-        "Answers": ["blah", 4, 8, 7],
-        "Correct Answer": ""
+        "Question": "JavaScript is a ___ -side programming language.",
+        "Answers": ["Client", "Server", "Both", "None"],
+        "Correct Answer": "Both"
     },
     {
-        "Question": "question 3",
-        "Answers": ["blah", 4, 8, 7],
-        "Correct Answer": ""
+        "Question": "Which Of The Dialog Box Display a Message And a Data Entry Field?",
+        "Answers": ["alert()", "propmt()", "confirm()", "msg()"],
+        "Correct Answer": "prompt()"
     },
     {
         "Question": "question 4",
@@ -67,14 +67,13 @@ var questionForm = [
 var i = 0
 var z = 0
 var answers = questionForm[i].Answers
-var questions = questionForm[i]
 
 var displayQuestion = ()=> {
-    questionEL.textContent = questions.Question
-    choice1El.textContent = answers[0];
-    choice2El.textContent = answers[1];
-    choice3El.textContent = answers[2];
-    choice4El.textContent = answers[3];
+    questionEL.textContent = questionForm[i].Question
+    choice1El.textContent = questionForm[i].Answers[0];
+    choice2El.textContent = questionForm[i].Answers[1];
+    choice3El.textContent = questionForm[i].Answers[2];
+    choice4El.textContent = questionForm[i].Answers[3];
 }
 var timeLeft = 60;
 
@@ -84,7 +83,11 @@ var countDown = ()=> {
 var timeInterval = setInterval(()=> {
     if (timeLeft === 0) {
     clearInterval(timeInterval);
-    timerEl.textContent = "Game Over"
+    timerEl.textContent = "Game Over";
+    buttonEl.textContent = "Play Again";
+    buttonEl.style.display = "block";
+    timeLeft = 60;
+    i = 0;
     } 
     else if (timeLeft === 1) {
     timerEl.textContent = `${timeLeft} second remaining`;
@@ -93,14 +96,25 @@ var timeInterval = setInterval(()=> {
     timerEl.textContent = `${timeLeft} seconds remaining`;
     timeLeft--;
     }
-}, 1000);
+}, 100);
 }
 
+
+var nextQuestion = ()=> {
+    i++;
+    displayQuestion();
+}
 var startGame = ()=>{
+    buttonEl.style.display = "none";
     timerEl.textContent = `${timeLeft} seconds remaining`;
     countDown()
     displayQuestion()
+    nextQuestion()
     
 }
 
 buttonEl.addEventListener("click", ()=>startGame());
+choice1El.addEventListener("click", ()=>nextQuestion());
+choice2El.addEventListener("click", ()=>nextQuestion());
+choice3El.addEventListener("click", ()=>nextQuestion());
+choice4El.addEventListener("click", ()=>nextQuestion());
