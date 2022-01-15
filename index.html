@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavasScript Quizlet</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Test your Javascript Knowledge!</h1>
+        <ul>
+            <li class="high-score">
+                View Highscores 
+            </li>
+            <li class="timer">
+                Begin the countdown on start. 
+            </li>
+        </ul>
+    </header>
+    <main class="quiz-body">
+        <!-- <div class="start-quiz">
+            <p>
+                The Quiz will be 10 questions and you will have 60 seconds to complete it. 
+                The top 3 Highscores will be recorded. Good luck!
+            </p>
+        </div> -->
+        <div class="questions-form">
+            <h2 class="question">
+                Quiz questions will display here on start
+            </h2>
+            <ul class="choices">
+                <li class="choice-1">The questions are multiple choice</li>
+                <li class="choice-2">You will have 60 seconds to answer 10 questions</li>
+                <li class="choice-3">Time is subtracted if you get the question wrong</li>
+                <li class="choice-4">The quiz ends when all the questions are answered or when you run out of time</li>
+            </ul>
+        </div>
+        <div class="buttons">
+            <button class="btn" id="start" type="submit">
+                Start Quiz!
+            </button>
+        </div>
+    </main>
+    <script src="./assets/js/script.js"></script>
+</body>
+</html>
