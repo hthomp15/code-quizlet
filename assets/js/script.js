@@ -1,3 +1,4 @@
+//All the page element varaibles 
 var questionEl = document.querySelector(".question");
 var questionsFormEl = document.querySelector(".questions-form");
 var timerEl = document.querySelector(".timer");
@@ -14,11 +15,12 @@ var scoreReportEl = document.querySelector(".score-report");
 var highScoreFormEl = document.querySelector(".high-score-form");
 var instructionPageEl = document.querySelector(".instruction-page")
 var submitScoreEl = document.querySelector(".submit")
-// Will try this Ul sleector to populte the entire answers list in one call. 
-// var choicesEL = document.querySelector("choices");
-   
+
+//These elements need to be hidden at the start of the game    
 questionsFormEl.style.display = "none"
 highScoreFormEl.style.display = "none"
+
+//This an array of questions that will be displayed. See the choices and correct answers
 var questionForm = [
     {
         "Question": "Inside which HTML element do we put the JavaScript?",
@@ -72,7 +74,8 @@ var questionForm = [
     }
 
 ]
-
+/* These variables are used to loop through my display function
+    This willl display my question and answer choices when called */
 var i = 0
 var z = 0
 var score = 0
@@ -84,12 +87,16 @@ var displayQuestion = ()=> {
     choice3El.textContent = questionForm[i].Answers[2];
     choice4El.textContent = questionForm[i].Answers[3];
 }
-var timeLeft = 100;
 
+//This is the total time of the game
+var timeLeft = 100;
+//This will listen for the click event and display if it was the correct choice
 var showResult = (e)=> {
     let correct = answerEl
     let inCorrect = answerEl
+    //I needed to stop the clicking from bubbling 
     e.stopPropagation()
+    //If the choice is matched the correct answer score + 100
     if (e.target.outerText === questionForm[i].Correct) {
         correct.textContent = "Well Done 🤩"
         score += 100 
@@ -99,6 +106,7 @@ var showResult = (e)=> {
             i++ 
             displayQuestion()
         }, 1000)
+    //If the choice is incorrect we will subtract 10 seconds    
     } else {
         inCorrect.textContent = "Incorrect 😱"
         setTimeout(()=> {
@@ -108,9 +116,10 @@ var showResult = (e)=> {
             displayQuestion()
         }, 1000)
     }
-    
 }
 
+/* This is my count down function. When you click start the countdown begins
+    It will display the time remaining in the TimerEL element */
 var countDown = ()=> {
     var timeInterval = setInterval(()=> {
         if (timeLeft === 0) {
@@ -131,6 +140,7 @@ var countDown = ()=> {
     }, 1000);
 }
 
+// This is my end game function. This displays my end game page content
 var endGame = ()=> {
     headingEl.style.display = "block"
     timerEl.textContent = "Game over! 🙅🏽‍♂️";
@@ -141,7 +151,7 @@ var endGame = ()=> {
     scoreReportEl.textContent = `Your score is ${score} and you had ${timeLeft} seconds remaining!`;
 }
 
-
+//This is the start game function. This resets the game and begins the countdown when clicked
 var startGame = ()=>{
     buttonEl.style.display = "none"
     instructionPageEl.style.display = "none"
@@ -151,6 +161,7 @@ var startGame = ()=>{
     highScoreFormEl.style.display = "none"
     choicesEl.style.display = "block"
     scoreEl.textContent = score
+    //This activates clicking on my answers and runs them through the show result when clicked
     choice1El.addEventListener("click", showResult);
     choice2El.addEventListener("click", showResult);
     choice3El.addEventListener("click", showResult);
@@ -161,7 +172,10 @@ var startGame = ()=>{
     timerEl.textContent = `${timeLeft} seconds remaining`;
     countDown()
     displayQuestion()
+    saveScore()
 }
+
+//This saves scores to the local storage. 
 var saveScore = ()=> {
     var userInitialsEl = document.querySelector(".initials").value;
     var userScore = score
@@ -172,13 +186,15 @@ var saveScore = ()=> {
     var oldList = localStorage.getItem("High Scores")
     var newList = JSON.parse(oldList) ?? []
     newList.push(scoreInput)
+    //Here i sort the list of scores and take the three highest
     newList.sort((a, b) => b.score - a.score)
     newList.splice(3)
     localStorage.setItem("High Scores", JSON.stringify(newList))
 }
 
+//Start game button functionality. when clickd start game
 buttonEl.addEventListener("click", ()=>startGame());
-
+//When clicked submit scores to local storage and move to highscores page
 submitScoreEl.addEventListener("click", (event)=>{
     saveScore()
     window.location.href="highscore.html"
