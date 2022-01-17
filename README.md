@@ -21,6 +21,9 @@
 
 ## Screen Shot 
 Home Page
+
 <img width="811" alt="Screen Shot 2022-01-16 at 11 20 45 PM" src="https://user-images.githubusercontent.com/92960832/149707611-6cbaae60-7f65-43cb-b981-0be0696c579b.png">
+
 Game Start
+
 <img width="865" alt="Screen Shot 2022-01-16 at 11 19 21 PM" src="https://user-images.githubusercontent.com/92960832/149707614-2ec61a42-062e-4394-b8bd-f07e41684fb6.png">
