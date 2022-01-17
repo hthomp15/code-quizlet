@@ -4,34 +4,53 @@ body {
     background-position: 80%;
     align-content: center;
 }
+/* Header Styles */
+.header {
+    color: cyan;
 
+}
 .header h1 {
     text-align: center;
-    background-position: 80%;
+    
 }
 .header ul {
-    background-position: 80%;
-    display: flex;
+    display:flex;
+    justify-content: space-evenly;
     list-style-type: none;
     padding: 0 30px 20px 30px;
-    justify-content: space-around;
 }
 .header li {
     display: inline;
-    justify-content: space-between;
-
 }
 
+.header a {
+    text-decoration: none;
+    color:cyan;
+}
+.header a:hover {
+    font-size: 120%;
+}
+/* Intro Page Styles */
+.instruction-page {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+.instruction-page h2 {
+    text-align:center;
+    margin: 0 0 10px 0;
+}
+.instruction-page p {
+    text-align: center;
+    margin:10px;
+}
+/* Quiz Body styles */
 .quiz-body {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-position: 100%;
-    flex-wrap: wrap;
-}
-
-.start-quiz p {
-    text-align: center;
+    
 }
 .questions-form {
     border-style: ridge;
@@ -41,18 +60,6 @@ body {
     margin-bottom: 20px;
 
 }
-
-.choices {
-    padding-inline-start: 0;
-}
-button {
-    color: cyan;
-    background-color: rgb(3, 12, 34);
-    padding: 5px;
-    border-radius: 10px;
-    border-color: whitesmoke;
-}
-
 .quiz-body li {
     list-style: none;
     padding: 10px;
@@ -64,5 +71,90 @@ button {
 .quiz-body li:hover{
     font-size: 120%;
 }
+.start-quiz p {
+    text-align: center;
+}
+.choices {
+    padding-inline-start: 0;
+}
+.buttons{
+    display: flex;
+    width: 60%;
+    justify-content: center;
+}
+/* Start Button Styles */
+button {
+    display: block;
+    color: cyan;
+    background-color: rgb(3, 12, 34);
+    padding: 5px;
+    border-radius: 10px;
+    border-color: whitesmoke;
+    width: 50%;
+    margin: 10px;
+}
+.buttons:hover {
+    width:65%;
+}
+button:hover {
+    cursor: pointer;
+    color: yellow;
+    transform: translateY(-3px);
+    font-size: 120%;
 
-
+}
+/* End Game Display  */
+.high-score-form h3 {
+    text-align: center;
+    margin: 5px;
+}
+.high-score-form input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    box-shadow:0 0 15px 4px rgba(222, 215, 21, 0.06);
+    border: none;
+    width: 40%;
+}
+.high-score-form a {
+    text-decoration: none;
+    color: cyan;
+}
+.high-score-form a:hover {
+    font-size: 120%;
+}
+/* High score Page*/
+.scores-form {
+    border-style: groove;
+    display:flex;
+    text-align: center;
+    flex-direction: column;
+    width:auto;
+    border-radius: 10px;
+    margin: 10% 30% 0 30%;
+}
+.scores-form h1 {
+    margin-bottom: 0;
+}
+.scores-form p {
+    margin-bottom: 0;
+}
+.scores-form ul {
+    list-style-type: numbers;
+    list-style-position: inside;
+}
+.scores-form li {
+    padding: 2.5px;
+}
+.scores-form div {
+    display:flex;
+    justify-content: center;
+}
+.scores-form button {
+    width:100px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.scores-form a {
+    text-decoration: none;
+}

@@ -9,10 +9,16 @@ var choice3El = document.querySelector(".choice-3");
 var choice4El = document.querySelector(".choice-4");
 var answerEl = document.querySelector(".answer")
 var scoreEl = document.querySelector(".high-score")
+var headingEl = document.querySelector(".heading");
+var scoreReportEl = document.querySelector(".score-report");
+var highScoreFormEl = document.querySelector(".high-score-form");
+var instructionPageEl = document.querySelector(".instruction-page")
+var submitScoreEl = document.querySelector(".submit")
 // Will try this Ul sleector to populte the entire answers list in one call. 
 // var choicesEL = document.querySelector("choices");
-
-
+   
+questionsFormEl.style.display = "none"
+highScoreFormEl.style.display = "none"
 var questionForm = [
     {
         "Question": "Inside which HTML element do we put the JavaScript?",
@@ -70,6 +76,7 @@ var questionForm = [
 var i = 0
 var z = 0
 var score = 0
+var finishTime = 100 - timeLeft;
 
 var displayQuestion = ()=> {
     questionEl.textContent = questionForm[i].Question;
@@ -78,7 +85,7 @@ var displayQuestion = ()=> {
     choice3El.textContent = questionForm[i].Answers[2];
     choice4El.textContent = questionForm[i].Answers[3];
 }
-var timeLeft = 60;
+var timeLeft = 100;
 
 var showResult = (e)=> {
     let correct = answerEl
@@ -97,7 +104,7 @@ var showResult = (e)=> {
         inCorrect.textContent = "Incorrect 😱"
         setTimeout(()=> {
             answerEl.textContent = ""
-            timeLeft = timeLeft - 5;
+            timeLeft = timeLeft - 10;
             i++
             displayQuestion()
         }, 1000)
@@ -122,22 +129,29 @@ var countDown = ()=> {
             timerEl.textContent = `${timeLeft} seconds remaining`;
             timeLeft--;
         }
-    }, 100);
+    }, 1000);
 }
+
+var highScoreEl = document.querySelector(".high-score-form");
+
 var endGame = ()=> {
-    var finishTime = 60 - timeLeft;
-    timerEl.textContent = "Game Over";
+    headingEl.style.display = "block"
+    timerEl.textContent = "Game over! 🙅🏽‍♂️";
     buttonEl.textContent = "Play Again";
     buttonEl.style.display = "block";
-    questionsFormEl.style.display = "none"
-    questionEl.textContent = `You finished in ${finishTime} seconds with a score of...${score}!`
-
-    
+    questionsFormEl.style.display = "none";
+    highScoreFormEl.style.display = "block";
+    scoreReportEl.textContent = `Your score is ${score} and you had ${timeLeft} seconds remaining!`;
 }
 
 
 var startGame = ()=>{
+    buttonEl.style.display = "none"
+    instructionPageEl.style.display = "none"
+    headingEl.style.display = "none"
     score = 0 
+    questionsFormEl.style.display = "none"
+    highScoreFormEl.style.display = "none"
     choicesEl.style.display = "block"
     scoreEl.textContent = score
     choice1El.addEventListener("click", showResult);
@@ -145,11 +159,44 @@ var startGame = ()=>{
     choice3El.addEventListener("click", showResult);
     choice4El.addEventListener("click", showResult);
     i=0
-    timeLeft = 60
+    timeLeft = 100
     questionsFormEl.style.display = "block";
     timerEl.textContent = `${timeLeft} seconds remaining`;
     countDown()
     displayQuestion()
 }
+var saveScore = ()=> {
+    var userInitialsEl = document.querySelector(".initials").value;
+    var userScore = score
+    var userTime = timeLeft
+    var scoreList = []
+    var highScoreList = {
+        initials: userInitialsEl,
+        score: userScore,
+        time: userTime
+    }
+    scoreList.push(highScoreList);
+    localStorage.setItem("Scores", JSON.stringify(scoreList));
+}
 
+var displayScores = ()=> {
+    let displayScore = JSON.parse(localStorage.getItem("Scores"));
+    var scoreListEl = document.querySelector(".score-list")
+    var firstplace = document.createElement("li")
+    var secondplace = document.createElement("li")
+    var thirdplace = document.createElement("li")
+    firstplace.textContent = displayScore[0].initials + " " + displayScore[0].score + " ," + displayScore[0].time + " seconds"
+    scoreListEl.appendChild(firstplace)
+    scoreListEl.appendChild(secondplace)
+    scoreListEl.appendChild(thirdplace)
+
+
+    }
+displayScores()
 buttonEl.addEventListener("click", ()=>startGame());
+
+submitScoreEl.addEventListener("click", (event)=>{
+    saveScore()
+    window.location.href="highscore.html"
+    displayScores()
+})

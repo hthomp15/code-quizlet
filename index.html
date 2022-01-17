@@ -9,34 +9,44 @@
 </head>
 <body>
     <header class="header">
-        <h1>Test your Javascript Knowledge!</h1>
+        <h1 class="heading">Test your Javascript Knowledge!</h1>
         <ul>
             <li class="high-score">
-                View Highscores 
+                <a href="./highscore.html">View Highscores</a>
             </li>
             <li class="answer"></li>
             <li class="timer">
-                Begin the countdown on start. 
+                Begin the countdown on start! 
             </li>
         </ul>
     </header>
     <main class="quiz-body">
-        <!-- <div class="start-quiz">
+        <div class="instruction-page">
+            <h2>Welcome to the Javascript Quiz!</h2>
             <p>
-                The Quiz will be 10 questions and you will have 60 seconds to complete it. 
-                The top 3 Highscores will be recorded. Good luck!
+                The Quiz will be 10 questions and you will have 100 seconds to complete it.
+                Choose wisely...an incorect choice 🙅🏽‍♂️ will take 5 seconds off the clock 😱.
+                The quiz over when all the questions are completed ✅ or if your time runs out ⌛️.
+                The top 3 Highscores will be recorded ⭐️⭐️⭐️. Good Luck, try your best!
             </p>
-        </div> -->
+        </div>
+
         <div class="questions-form">
             <h2 class="question">
                 Quiz questions will display here on start
             </h2>
             <ul class="choices">
-                <li class="choice-1">questions are multiple choice </li>
-                <li class="choice-2">You will have 60 seconds to answer 10 questions</li>
-                <li class="choice-3">Time is subtracted if you get the question wrong</li>
-                <li class="choice-4">The quiz ends when all the questions are answered or when you run out of time</li>
+                <li class="choice-1">Placeholder text</li>
+                <li class="choice-2">Placeholder text</li>
+                <li class="choice-3">Placeholder text</li>
+                <li class="choice-4">Placeholder text</li>
             </ul>
+        </div>
+        <div class="high-score-form">
+            <h2 class="score-report"> </h3>
+            <label></label>
+            <input  type="text"  class="initials" name="initials" placeholder="Enter Initials" />
+            <a href="./highscore.html" class="submit" id="register-high-score" type="button">Submit</a>   
         </div>
         <div class="buttons">
             <button class="btn" id="start" type="submit">
