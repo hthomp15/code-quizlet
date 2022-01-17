@@ -76,7 +76,6 @@ var questionForm = [
 var i = 0
 var z = 0
 var score = 0
-var finishTime = 100 - timeLeft;
 
 var displayQuestion = ()=> {
     questionEl.textContent = questionForm[i].Question;
@@ -132,8 +131,6 @@ var countDown = ()=> {
     }, 1000);
 }
 
-var highScoreEl = document.querySelector(".high-score-form");
-
 var endGame = ()=> {
     headingEl.style.display = "block"
     timerEl.textContent = "Game over! 🙅🏽‍♂️";
@@ -168,35 +165,21 @@ var startGame = ()=>{
 var saveScore = ()=> {
     var userInitialsEl = document.querySelector(".initials").value;
     var userScore = score
-    var userTime = timeLeft
-    var scoreList = []
-    var highScoreList = {
+    var scoreInput = {
         initials: userInitialsEl,
         score: userScore,
-        time: userTime
     }
-    scoreList.push(highScoreList);
-    localStorage.setItem("Scores", JSON.stringify(scoreList));
+    var oldList = localStorage.getItem("High Scores")
+    var newList = JSON.parse(oldList) ?? []
+    newList.push(scoreInput)
+    newList.sort((a, b) => b.score - a.score)
+    newList.splice(3)
+    localStorage.setItem("High Scores", JSON.stringify(newList))
 }
 
-var displayScores = ()=> {
-    let displayScore = JSON.parse(localStorage.getItem("Scores"));
-    var scoreListEl = document.querySelector(".score-list")
-    var firstplace = document.createElement("li")
-    var secondplace = document.createElement("li")
-    var thirdplace = document.createElement("li")
-    firstplace.textContent = displayScore[0].initials + " " + displayScore[0].score + " ," + displayScore[0].time + " seconds"
-    scoreListEl.appendChild(firstplace)
-    scoreListEl.appendChild(secondplace)
-    scoreListEl.appendChild(thirdplace)
-
-
-    }
-displayScores()
 buttonEl.addEventListener("click", ()=>startGame());
 
 submitScoreEl.addEventListener("click", (event)=>{
     saveScore()
     window.location.href="highscore.html"
-    displayScores()
 })
